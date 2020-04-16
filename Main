@@ -1,0 +1,76 @@
+//   Go to: https://www.w3schools.com/js/tryit.asp?filename=tryjs_variables
+//   Copy this entire box of text (you may include these notation lines as well). 
+//   On the left box of the link select all of the text, delete it, and paste this in place.
+//   Click "Run" at the top. The right hand box may be resized, as well as the text area.
+<!DOCTYPE html>
+<html>
+<body>
+
+  <center>
+<form>
+<textarea id="orderID" name="orderName" col="20" row="50"></textarea>
+<p>
+<input type="submit">
+</p>
+</form>
+</center>
+<script>
+var form = document.querySelector('form');
+var txt1 = document.getElementById('orderID');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  checkOrder(this.orderName.value);
+});
+
+
+function checkOrder(orderName){
+const regex = /.+\s*:.+/gm;	
+const regNotes = /Notes:[^]+/gm;
+const str = orderName;
+const str2 = orderName;
+var newText = "";
+var boolean = "false"
+var notes = "";
+let m;
+//This loop checks for notes.
+while ((m = regNotes.exec(str)) !== null) { 
+    // This is necessary to avoid infinite loops with zero-width matches
+    if (m.index === regNotes.lastIndex) {
+        regNotes.lastIndex++;
+    }
+    // The result can be accessed through the `m`-variable.
+    m.forEach((match, groupIndex) => {
+    	notes += match + "\n";   
+});
+//This loop matches a line with content after the colon indicating an order.
+
+let n;
+while ((n = regex.exec(str2)) !== null) { 
+    // This is necessary to avoid infinite loops with zero-width matches
+    if (n.index === regex.lastIndex) {
+        regex.lastIndex++;
+    }
+    // The result can be accessed through the `m`-variable.
+    n.forEach((match, groupIndex) => {
+    var patt = new RegExp(regNotes);
+    if (patt.test(match) === false){
+    	newText += match + "\n";//Keep "notes" out so it's not duplicated
+      }else{
+      
+      }
+});
+
+
+}
+document.getElementById("orderID").value = newText + "\n" + notes;
+var copyText = document.getElementById("orderID");
+copyText.select(); 
+document.execCommand("copy");
+}
+}
+</script>
+
+</body>
+</html>
+
+
